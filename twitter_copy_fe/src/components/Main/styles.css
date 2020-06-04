@@ -1,0 +1,11 @@
+.mainCenter{
+    background-color: ghostwhite;
+    margin: auto;
+    max-width: 70%;
+    padding: 2%;
+}
+.buscador{
+    border-radius: 2%;
+    margin: auto;
+    max-width: 30%;
+}
