@@ -3,9 +3,10 @@ import { connect } from 'react-redux';
 import Popup from 'reactjs-popup';
 
 import * as selectors from '../../reducers';
-import * as actions from '../../actions/register';
-
-import { Link } from 'react-router-dom';
+import * as actions from '../../actions/events';
+import Navbar from '../Navbar';
+import Events from '../Events'
+import { v4 as uuidv4 } from 'uuid';
 
 import './styles.css'; 
 
@@ -23,55 +24,47 @@ const labelInput = (labelText, value, onChange) => {
 	)
 };
 
-const Event = ({ onSubmit, isLoading }) => {
-    const [username, changeUsername] = useState('');
-    const [password, changePassword] = useState('');
-    const [name, changeName] = useState('');
-    const [lastname, changeLastname] = useState('');
-    const [mail, changeMail] = useState('');
-    const [confirmPassword, changeConfirmPassword] = useState('');
+const MainEvents = ({ 
+    onSubmit,  
+    user
+}) => {
+    const [description, changeDescription] = useState('');
+    const [ubication, changeUbication] = useState('');
     return (
         <Fragment>
-            <div className="background">
-                <div className="form-user">
-                    <div className="tittle-container">
-                        <p className="tittle">
-                            Register:
-                        </p>
-                    </div>
-                    <div className="input-container">
-                        <div className="p-inputs-user">
-                            {labelInput("Nombre",name,changeName)}
-                            {labelInput("Apellido",lastname,changeLastname)}
-                        </div>
-                        <div className="p-inputs-user">
-                            {labelInput("Usuario",username,changeUsername)}
-                            {labelInput("Correo",mail,changeMail)}
-                        </div>
-                        <div className="p-inputs-user">
-                            {labelInput("Contraseña",password,changePassword)}
-                            {labelInput("Confirmar contraseña",confirmPassword,changeConfirmPassword)}
+            <Navbar/>
+            <div className= "enventCenter">
+                <div className= "eventmaking-container">
+                    <div className = "event-inputs">
+                        <div className="input-container">
+                            {labelInput("Description",description,changeDescription)}
+                            {labelInput("Ubication",ubication,changeUbication)}
                         </div>
                     </div>
-                    <div className="register-button">
-                        <button className="register-user-button" type="submit"
-                            onClick = {() => onSubmit(username, password, name, lastname, mail)}>
-                            {'registrarme'}
-                        </button>
-                    </div>
+                    <button className = "eventbtn" type="submit" onClick={
+                        () => onSubmit(user,description, ubication)}>
+                        {'Publicar Evento'}
+                    </button>
                 </div>
+                <Events/>
             </div>
+
         </Fragment>
     );  
 };
 
 export default connect(
     (state) => ({
-        isLoading: selectors.getIsRegistering(state),
+        user: selectors.getAuthUserID(state),
     }),
     dispatch => ({
-        onSubmit(username, password,name, lastname, mail) {
-            dispatch(actions.startRegister(username, password, name, lastname,mail));
+        onSubmit(user, description, ubication) {
+            dispatch(actions.startAddingEvent({
+                id: uuidv4(),
+                user,
+                ubication,
+                description, 
+            }));
         },
     }),
-)(Event);
+)(MainEvents);

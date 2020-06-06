@@ -14,6 +14,7 @@ import './styles.css';
 import Login from '../Login';
 import Register from '../Register';
 import Main from '../Main';
+import MainEvents from '../Event';
 
 const routes = [
     {
@@ -30,6 +31,11 @@ const routes = [
         path: '/main',
         exact: true,
         component: Main,
+    },
+    {
+        path: '/events',
+        exact: true,
+        component: MainEvents,
     },
 ];
 

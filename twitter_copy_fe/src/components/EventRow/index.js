@@ -3,21 +3,24 @@ import { connect } from 'react-redux';
 
 import './styles.css';
 import * as selectors from '../../reducers';
-import * as actions from '../../actions/posts';
+import * as actions from '../../actions/events';
 
 
-const PostRow = ({ 
-    post, 
+const EventRow = ({ 
+    event, 
     state,
 }) => {
-  const user = selectors.getUser(state, post.user)
+  const user = selectors.getUser(state, event.user)
   return(
     <div className="posts">
       <div className="postUser">
           <div>{user.username}</div>
       </div>
       <div className="postCotent">
-          <div>{ post.content }</div>
+          <div>{ event.ubication }</div>
+      </div>
+      <div className="postCotent">
+          <div>{ event.description }</div>
       </div>
     </div>
   )
@@ -25,12 +28,12 @@ const PostRow = ({
 
 export default connect(
   (state, {id}) => ({
-    post: selectors.getPost(state, id),
+    event: selectors.getEvent(state, id),
     state: state
   }),
   (dispatch, { id }) => ({
     onDelete() {
-      dispatch(actions.startRemovingPost(id));
+      dispatch(actions.startRemovingEvent(id));
     }
   }),
-)(PostRow);
+)(EventRow);

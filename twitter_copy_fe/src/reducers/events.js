@@ -27,10 +27,10 @@ const byId = (state = {}, action) => {
       return newState;
     }
     case types.EVENT_ADD_COMPLETED: {
-      const { oldId, Event } = action.payload;
+      const { oldId, event } = action.payload;
       const newState = omit(state, oldId);
-      newState[Event.id] = {
-        ...Event,
+      newState[event.id] = {
+        ...event,
         isConfirmed: true,
       };
       return newState;
@@ -53,8 +53,8 @@ const order = (state = [], action) => {
       return [...state, action.payload.id];
     }
     case types.EVENT_ADD_COMPLETED: {
-      const { oldId, Event } = action.payload;
-      return state.map(id => id === oldId ? Event.id : id);
+      const { oldId, event } = action.payload;
+      return state.map(id => id === oldId ? event.id : id);
     }
     case types.EVENT_REMOVE_STARTED: {
       return state.filter(id => id !== action.payload.id);
@@ -108,6 +108,6 @@ export default combineReducers({
 });
 
 export const getEvent = (state, id) => state.byId[id];
-export const getEvents = state => state.order.map(id => Event(state, id));
+export const getEvents = state => state.order.map(id => getEvent(state, id));
 export const isFetchingEvents = state => state.isFetching;
 export const getFetchingEventError = state => state.error;

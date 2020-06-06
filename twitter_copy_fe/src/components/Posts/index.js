@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 // import './styles.css';
 import * as selectors from '../../reducers';
 import * as actions from '../../actions/posts';
+import * as usersactions from '../../actions/users';
 import PostRow from '../PostRow';
 import './styles.css';
 
@@ -48,6 +49,7 @@ export default connect(
   dispatch => ({
     onLoad() {
       dispatch(actions.startFetchingPosts());
+      dispatch(usersactions.startFetchingUsers());
     },
   }),
 )(Posts);
