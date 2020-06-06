@@ -1,0 +1,16 @@
+.postCotent{
+    
+}
+.postUser{ 
+
+}
+
+.posts{
+    background-color: ghostwhite;
+    border-radius: 0.5rem;
+    border-style: solid;
+    border-color: rgb(153, 151, 151);
+    border-width: 1px;
+    margin: 1%;
+    padding: 1vw;
+}

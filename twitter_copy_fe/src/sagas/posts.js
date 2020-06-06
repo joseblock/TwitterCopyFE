@@ -76,10 +76,11 @@ function* addPost(action){
             if(http.isSuccessful(response.status)){
                 const jsonResult = yield response.json();
                 yield put(actions.completeAddingPost(
-                    action.payload.Post.id, 
+                    action.payload.id, 
                     jsonResult,
                     ));
             }else{
+                console.log("error");
                 const {non_field_errors} = yield response.json;
                 yield put(actions.failAddingPost(non_field_errors[0]));
             }

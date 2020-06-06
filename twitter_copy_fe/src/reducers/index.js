@@ -74,3 +74,6 @@ export const getFetchingTagsError = state => tagsSelectors.getFetchingTagsError(
 
 export const getIsRegistering = state => registerSelectors.getIsRegistering(state.register);
 export const getRegisterError = state => registerSelectors.getRegisterError(state.register);
+
+
+

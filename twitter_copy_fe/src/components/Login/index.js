@@ -25,44 +25,36 @@ const Login = ({
                     <p className = "tittle">
                         TwitterCopy
                     </p>
-                    <p>
-                        <input 
-                            className="input-login"
-                            type="text"
-                            placeholder="Username"
-                            value={username}
-                            onChange={e => changeUsername(e.target.value)}
-                        />
-                    </p>
-                    <p>
-                        <input 
-                            className="input-login"
-                            type="password"
-                            placeholder="Password"
-                            value={password}
-                            onChange={e => changePassword(e.target.value)}
-                        />
-                    </p>
-                    <p>
-                        {
-                            isLoading ? (
-                                <strong>{'Cargando...'}</strong>
-                            ) : ( 
-                                <button className = "logInBts" type="submit" onClick={
-                                    () => onSubmit(username, password)}>
-                                    {'login'}
-                                </button>
-                            )
-                        }
-                    </p>
+                    <input 
+                        className="input-login"
+                        type="text"
+                        placeholder="Username"
+                        value={username}
+                        onChange={e => changeUsername(e.target.value)}
+                    />
+                    <input 
+                        className="input-login"
+                        type="password"
+                        placeholder="Password"
+                        value={password}
+                        onChange={e => changePassword(e.target.value)}
+                    />
+                    {
+                        isLoading ? (
+                            <strong>{'Cargando...'}</strong>
+                        ) : ( 
+                            <button className = "logInBts" type="submit" onClick={
+                                () => onSubmit(username, password)}>
+                                {'login'}
+                            </button>
+                        )
+                    }
                     <Link to='/register'>
                         <ul className="registerlink">Register</ul>
                     </Link>
                     {
                         error && (
-                            <p>
-                                <strong className='error-text'>{ error }</strong>
-                            </p>
+                            <strong className='error-text'>{ error }</strong>       
                         )
                     }
                 </div>

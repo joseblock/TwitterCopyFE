@@ -5,18 +5,20 @@ import * as actions from '../../actions/posts';
 import './styles.css'; 
 import Navbar from '../Navbar';
 import { Link, Redirect } from 'react-router-dom';
-// import Posts from '../Posts'
+import { v4 as uuidv4 } from 'uuid';
+import Posts from '../Posts';
 
 const Main = ({
     onSubmit,
     onClick,
-    isAuthenticated = true,}) => {
-        const [post, changePost] = useState('');
+    user,
+    isAuthenticated = true,
+}) => {
+        const [content, changeContent] = useState('');
         if (isAuthenticated === false){
             return(
                 <Redirect to = '/login'/>
             )
-            
         }
         return (
             <Fragment>
@@ -29,18 +31,17 @@ const Main = ({
                                     className="input-login"
                                     type="text"
                                     placeholder="En que piensas?"
-                                    value={post}
-                                    onChange={e => changePost(e.target.value)}
+                                    value={content}
+                                    onChange={e => changeContent(e.target.value)}
                                 />
                             </p>
                         </div>
                         <button className = "postear" type="submit" onClick={
-                            () => onSubmit()}>
+                            () => onSubmit(user, content)}>
                             {'Publicar'}
                         </button>
                     </div>
-                    <div className="posts">
-                    </div>
+                    <Posts/>
                 </div>
             </Fragment>
         );
@@ -49,10 +50,15 @@ const Main = ({
 export default connect(
     state => ({
         isAuthenticated: selectors.isAuthenticated(state),
+        user: selectors.getAuthUserID(state),
     }),
     dispatch => ({
-        onSubmit(){
-            
+        onSubmit(user, content){
+            dispatch(actions.startAddingPost({
+                id: uuidv4(),
+                user,
+                content,
+            }))
         }
     })
 )(Main);

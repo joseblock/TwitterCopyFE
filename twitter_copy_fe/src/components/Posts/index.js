@@ -5,9 +5,13 @@ import { connect } from 'react-redux';
 import * as selectors from '../../reducers';
 import * as actions from '../../actions/posts';
 import PostRow from '../PostRow';
+import './styles.css';
 
-
-const PostList = ({ posts, isLoading, onLoad }) => {
+const Posts = ({ 
+  posts,
+  isLoading, 
+  onLoad 
+}) => {
   useEffect(onLoad, []);
   return (
     <Fragment>
@@ -23,13 +27,13 @@ const PostList = ({ posts, isLoading, onLoad }) => {
       }
       {
         posts.length > 0 && !isLoading && (
-          <table>
-            <tbody>
+          <div>
+            <div>
               {
                 posts.map(({ id }) => <PostRow key={id} id={id} />)
               }
-            </tbody>
-          </table>
+            </div>
+          </div>
         )
       }
     </Fragment>
@@ -38,7 +42,7 @@ const PostList = ({ posts, isLoading, onLoad }) => {
 
 export default connect(
   state => ({
-    posts: selectors.getPost(state),
+    posts: selectors.getPosts(state),
     isLoading: selectors.isFetchingPosts(state),
   }),
   dispatch => ({
@@ -46,4 +50,4 @@ export default connect(
       dispatch(actions.startFetchingPosts());
     },
   }),
-)(PostList);
+)(Posts);

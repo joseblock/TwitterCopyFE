@@ -7,32 +7,25 @@ import * as actions from '../../actions/posts';
 
 
 const PostRow = ({ 
-    username, 
-    onDelete, 
-    isConfirmed = false 
-}) => (
-    <tr className={!isConfirmed ? 'post' : ''}>
-        <td>{ username }</td>
-    </tr>
-    <tr className={!isConfirmed ? 'post' : ''}>
-        <td>
-            {
-                isConfirmed && (
-                <button
-                    onClick={onDelete}
-                >
-                    {'Borrar'}
-                </button>
-                )
-            }
-        </td>
-    </tr>
-
-);
+    post, 
+}) => {
+  // const user = selectors.getUser(poststate, post.user)
+  console.log(post);
+  return(
+    <div className="posts">
+      <div className="postUser">
+          <div>{post.user}</div>
+      </div>
+      <div className="postCotent">
+          <div>{ post.content }</div>
+      </div>
+    </div>
+  )
+};
 
 export default connect(
-  (state, { id }) => ({
-    ...selectors.getPost(state, id),
+  (state, {id}) => ({
+    post: selectors.getPost(state, id),
   }),
   (dispatch, { id }) => ({
     onDelete() {

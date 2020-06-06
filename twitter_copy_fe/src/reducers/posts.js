@@ -27,10 +27,10 @@ const byId = (state = {}, action) => {
       return newState;
     }
     case types.POST_ADD_COMPLETED: {
-      const { oldId, Post } = action.payload;
+      const { oldId, post } = action.payload;
       const newState = omit(state, oldId);
-      newState[Post.id] = {
-        ...Post,
+      newState[post.id] = {
+        ...post,
         isConfirmed: true,
       };
       return newState;
@@ -53,8 +53,8 @@ const order = (state = [], action) => {
       return [...state, action.payload.id];
     }
     case types.POST_ADD_COMPLETED: {
-      const { oldId, Post } = action.payload;
-      return state.map(id => id === oldId ? Post.id : id);
+      const { oldId, post } = action.payload;
+      return state.map(id => id === oldId ? post.id : id);
     }
     case types.POST_REMOVE_STARTED: {
       return state.filter(id => id !== action.payload.id);

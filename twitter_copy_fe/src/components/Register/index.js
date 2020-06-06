@@ -34,7 +34,7 @@ const Register = ({ onSubmit, isLoading }) => {
         <Fragment>
             <div className="background">
                 <div className="form-user">
-                    <Link to=''>
+                    <Link to='/login'>
                         <button className="close">{ "x" }</button>
                     </Link>
                     <div className="tittle-container">

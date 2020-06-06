@@ -20,7 +20,7 @@ html,body{
 }
 
 .input-login {
-    margin: auto;
+    margin: 1vh;
     max-width: 80%;
 
 }
@@ -34,7 +34,7 @@ html,body{
     border-radius: 1rem;
     margin-top: 15%;
     max-width: 20%;
-    padding: 1rem;
+    padding: 3vw;
     text-align: center;
 }
 
@@ -46,9 +46,13 @@ html,body{
 .logInBts{
     background-color: rgba(108, 183, 233, 0.623);
     border-radius: 1rem;
-    padding: 0.2rem;
+    padding: 0.5vw;
     width: 60%;
+    margin: 1vw;
 }
 .registerlink{
-    text-align: center;
+    display: flex;
+    margin-left: 25%;
+    margin-bottom: 0;
+    margin-top: 0;
 }
