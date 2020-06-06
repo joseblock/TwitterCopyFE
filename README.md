@@ -10,3 +10,5 @@
 * yarn add lodash
 * yarn add express
 * yarn add react-popup
+* En la carpeta del proyecto twitter_copy
+* yarn start 
